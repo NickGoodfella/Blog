@@ -61,5 +61,17 @@ const adminBro = new AdminBro({
     }],
     rootPath: '/admin',
   })
-  router = AdminBroExpress.buildRouter(adminBro,  router)
+  router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+    authenticate: async (email, password) => {
+      const user = await User.findOne({ email })
+      if (user) {
+        const matched = await bcrypt.compare(password, user.encryptedPassword)
+        if (matched) {
+          return user
+        }
+      }
+      return false
+    },
+    cookiePassword: 'goliath-and-zoomer-are-the-optic_kings-of-america-do-not-hate-us!',
+  }, router)
 module.exports = router
