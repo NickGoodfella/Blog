@@ -72,6 +72,6 @@ const adminBro = new AdminBro({
       }
       return false
     },
-    cookiePassword: 'goliath-and-zoomer-are-the-optic_kings-of-america-do-not-hate-us!',
+    cookiePassword: 'super-secret-password-for-cookies-lol',
   }, router)
 module.exports = router
